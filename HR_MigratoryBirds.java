@@ -1,4 +1,6 @@
 import java.util.*;
+
+import javax.sound.sampled.SourceDataLine;
 public class HR_MigratoryBirds {
   public static int[] bubbleSort(int[] nums) {
     int n = nums.length;
@@ -14,33 +16,38 @@ public class HR_MigratoryBirds {
   return nums;
   }
   public static void main(String[] args) {
-    // int[] arr = {1, 4, 4, 5, 3};
-    int[] arr = {1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 5};
-    int len = arr.length;
-    int[] res = bubbleSort(arr);
-    List modus = new ArrayList<Integer>();
-    int current = arr[0];
-    int sum = 1;
+    // deklarasi array list
+    List<Integer> arr = new ArrayList<Integer>();
+    int result = 0;
   
-    for(int i=1; i<len; i++) {
-      if(current==res[i]) {
-        sum++;
+    arr.add(2);
+    arr.add(2);
+    arr.add(3);
+    arr.add(3);
+    arr.add(1);
+
+    // deklarasi hash map
+    HashMap<Integer, Integer> count = new HashMap<Integer, Integer>();
+    // pendefinisian key dan value dari hash map
+    // iterasi setiap elemen array
+    for(int e : arr) {
+      // jika elemen saat ini belum ada key nya di hash map, maka inisialisasi
+      if(!count.containsKey(e)) {
+        count.put(e, 1);
       } else {
-        modus.add(sum);
-        current = res[i];
-        sum = 1;
+        // jika elemen saat ini sudah ada key nya pada hash map, maka tinggal increment value nya 1
+        count.put(e, count.get(e)+1);
       }
     }
-    
-    /*
-    modus.add(2);
-    modus.add(2);
-    modus.add(3);
-    modus.add(3);
-    modus.add(1);
-    */
-    for(Object e:modus) {
-      System.out.println(e);
+    // dapatkan nilai maksimal dari hash map
+    int maxValue = (Collections.max(count.values()));
+    // iterasi semua elemen hash map
+    for (Map.Entry<Integer, Integer> entry : count.entrySet()) {
+      if (entry.getValue() == maxValue) {
+        result = entry.getKey();
+        break;
+      }
     }
+    System.out.println(result);
   }
 }
