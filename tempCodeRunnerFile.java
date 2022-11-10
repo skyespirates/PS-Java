@@ -1,1 +1,1 @@
-System.out.println(result);
+n-(p-1)
